@@ -19,11 +19,11 @@ my_dataframe = session.table("smoothies.public.fruit_options").select(col('fruit
 
 ingrediants_list=st.multiselect('choose upto 5 ingrediants',my_dataframe,max_selections=5)
 
-if ingrediants_list:
+if ingredients_list:
     
-    ingrediants_string=''
+    ingredients_string=''
     for i in ingrediants_list:
-        ingrediants_string+=i+' '
+        ingredients_string+=i+' '
     #st.write(ingrediants_string)
 
     my_insert_stmt = f"""INSERT INTO smoothies.public.orders(ingredients, name_on_order, order_uid)
