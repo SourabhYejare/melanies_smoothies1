@@ -22,7 +22,7 @@ ingrediants_list=st.multiselect('choose upto 5 ingrediants',my_dataframe,max_sel
 if ingredients_list:
     
     ingredients_string=''
-    for i in ingrediants_list:
+    for i in ingredients_list:
         ingredients_string+=i+' '
     #st.write(ingrediants_string)
 
