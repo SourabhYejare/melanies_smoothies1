@@ -26,8 +26,8 @@ if ingrediants_list:
         ingrediants_string+=i+' '
     #st.write(ingrediants_string)
 
-    my_insert_stmt = """ insert into smoothies.public.orders(ingredients,name_on_order)
-            values ('""" + ingrediants_string + """','""" +name_on_order+"""')"""
+    my_insert_stmt = f"""INSERT INTO smoothies.public.orders(ingredients, name_on_order, order_uid)
+                         VALUES ('{ingredients_string}', '{name_on_order}', smoothies.public.order_seq.NEXTVAL)"""
 
     #st.write(my_insert_stmt)
     #st.stop
