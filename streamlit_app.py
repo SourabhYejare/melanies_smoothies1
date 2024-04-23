@@ -9,14 +9,12 @@ st.title(":cup_with_straw: Customize Your Smoothie:cup_with_straw:")
 st.write(""" 
 Choose the fruits you want in your custom Smoothie"""
 )
-
-
 name_on_order = st.text_input('Name on Smoothie')
 st.write('The name on your smoothie will be:', name_on_order)
 
 from snowflake.snowpark.functions import col
 
-my_dataframe = session.table("smoothies.public.fruit_options")
+my_dataframe = session.table("smoothies.public.fruit_options").select(col("fruit_name"))
 #st.dataframe(data=my_dataframe, use_container_width=True)
 # # st.stop()
 
@@ -35,7 +33,7 @@ if ingredients_list:
         #search_on=pd_df.loc[pd_df['FRUIT_NAME'] == i, 'SEARCH_ON'].iloc[0]
         #st.write('The search value for ', i,' is ', search_on, '.')
         st.subheader(i+' Nutrition Information')
-        fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+i)
+        fruityvice_response = requests.get("https://fruityvice.com/api/fruit/")
         fv_df=st.dataframe(data=fruityvice_response.json(),use_container_width=True)
 
     #st.write(ingrediants_string)
