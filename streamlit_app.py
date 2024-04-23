@@ -17,7 +17,7 @@ from snowflake.snowpark.functions import col
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('fruit_name'))
 # st.dataframe(data=my_dataframe, use_container_width=True)
 
-ingrediants_list=st.multiselect('choose upto 5 ingrediants',my_dataframe,max_selections=5)
+ingredients_list=st.multiselect('choose upto 5 ingrediants',my_dataframe,max_selections=5)
 
 if ingredients_list:
     
