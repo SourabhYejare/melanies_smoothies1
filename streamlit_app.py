@@ -1,5 +1,7 @@
 # Import python packages
 import streamlit as st
+import requests
+
 cnx=st.connection("snowflake")
 session=cnx.session()
 # Write directly to the app
@@ -24,6 +26,10 @@ if ingredients_list:
     ingredients_string=''
     for i in ingredients_list:
         ingredients_string+=i+' '
+        st.subheader(i+'Nutrition Information')
+        fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+i)
+        fv_df=st.dataframe(data=fruityvice_response.json(),use_container_width=True)
+
     #st.write(ingrediants_string)
 
     my_insert_stmt = f"""INSERT INTO smoothies.public.orders(ingredients, name_on_order, order_uid)
@@ -36,7 +42,6 @@ if ingredients_list:
         session.sql(my_insert_stmt).collect()
         st.success('Your Smoothie is ordered! '+ name_on_order,icon="✅")
 
-import requests
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+#fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
 #st.text(fruityvice_response.json())
-fv_df=st.dataframe(data=fruityvice_response.json(),use_container_width=True)
+#fv_df=st.dataframe(data=fruityvice_response.json(),use_container_width=True)
